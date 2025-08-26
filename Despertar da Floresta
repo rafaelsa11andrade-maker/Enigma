@@ -1,5 +1,46 @@
+// Projeto completo Next.js pronto para deploy, corrigido e funcional
+
+// 1. package.json
+{
+  "name": "enigma-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "framer-motion": "^10.12.16",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
+
+// 2. Estrutura de pastas
+// - pages/index.js (código do site)
+// - components/ui/index.js (Button, Input, Card)
+// - public/ (imagens, se necessário)
+
+// 3. components/ui/index.js
+import React from 'react';
+
+export function Button({ children, ...props }) {
+  return <button {...props} className='bg-green-700 hover:bg-green-600 rounded p-2'>{children}</button>;
+}
+
+export function Input(props) {
+  return <input {...props} className='p-2 rounded border border-green-600 bg-green-800 text-white' />;
+}
+
+export function Card({ children, ...props }) {
+  return <div {...props} className='p-4 rounded-lg bg-green-900'>{children}</div>;
+}
+
+// 4. pages/index.js
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Input, Card } from '@/components/ui';
+import { Button, Input, Card } from '../components/ui';
 import { motion } from 'framer-motion';
 
 export default function EnigmaSite() {
@@ -37,7 +78,7 @@ export default function EnigmaSite() {
     } else if (question === SECRET_QUESTION) {
       if (trimmed === SECRET_ANSWER) {
         setHistory([...history, { question, answer: trimmed, correct: true }]);
-        setFinalMessage('✅ Parabéns! Vocês descobriram o dia que começa a Despertar da Floresta: o chamado da natureza... espero vocês lá Agentes🌲');
+        setFinalMessage('✅ Parabéns! Vocês descobriram o dia que começa o Despertar da Floresta: o chamado da natureza... espero vocês lá Agentes🌲');
         setShowImage(true);
       } else {
         setHistory([...history, { question, answer: trimmed, correct: false }]);
@@ -89,3 +130,4 @@ export default function EnigmaSite() {
     </div>
   );
 }
+
